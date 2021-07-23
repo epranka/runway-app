@@ -1,0 +1,8 @@
+@keyframes animateBackground {
+  from {
+    background-position-y: 0;
+  }
+  to {
+    background-position-y: 160px;
+  }
+}

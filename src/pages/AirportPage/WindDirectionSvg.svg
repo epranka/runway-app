@@ -1,0 +1,4 @@
+<svg id="windDirectionSvg" viewBox="0 0 160 160" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#87ceeb" d="M0,0 l20,20 l20,-20 l0,20 l-20,20 l-20,-20 l0,-20"></path>
+    <path fill="#87ceeb" d="M80,80 l20,20 l20,-20 l0,20 l-20,20 l-20,-20 l0,-20"></path>
+</svg>
