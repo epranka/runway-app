@@ -22,30 +22,6 @@ const runwayAPI = async (req, res) => {
   try {
     const { icao } = req.params;
 
-    const metarUrl = createMetarUrl(icao);
-
-    const metarXML = await downloadFile(metarUrl);
-
-    const parser = new xml2js.Parser();
-
-    const parsed = (await parser.parseStringPromise(metarXML)).response;
-
-    const rawData = parsed.data[0];
-    const resultCount = parseInt(rawData.$.num_results);
-
-    if (resultCount === 0) {
-      return res.json({
-        code: 1,
-        error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search nearest a bigger airport`,
-      });
-    }
-
-    const airportMetar = rawData.METAR[0];
-    const rawMetar = get(airportMetar.raw_text);
-    const wind_direction = parseFloat(get(airportMetar.wind_dir_degrees));
-    const wind_speed = parseFloat(get(airportMetar.wind_speed_kt));
-    const time = get(airportMetar.observation_time);
-
     const airportUrl = createAirportUrl(icao);
     const airportDataRaw = await downloadFile(airportUrl);
     const airportData = JSON.parse(airportDataRaw);
@@ -53,14 +29,25 @@ const runwayAPI = async (req, res) => {
     if (!airportData.ident) {
       return res.json({
         code: 2,
-        error: `Can't find airport ${icao.toUpperCase()} data. Try to search nearest a bigger airport`,
+        error: `Can't find airport ${icao.toUpperCase()} data. Try to search a nearest bigger airport`,
       });
     }
     if (!airportData.runways || !airportData.runways.length) {
       return res.json({
         code: 3,
-        error: `Can't find airport ${icao.toUpperCase()} data. Try to search nearest a bigger airport`,
+        error: `We have an invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
       });
+    }
+
+    let station = {
+      icao_code: airportData.icao_code,
+      distance: 0,
+    };
+    if (
+      airportData.station &&
+      airportData.station.icao_code !== airportData.icao_code
+    ) {
+      station = airportData.station;
     }
 
     const runways = airportData.runways.map((runway) => {
@@ -92,9 +79,33 @@ const runwayAPI = async (req, res) => {
     if (!validRunways.length) {
       return res.json({
         code: 4,
-        error: `We have invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
+        error: `We have an invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
       });
     }
+
+    const metarUrl = createMetarUrl(station.icao_code);
+
+    const metarXML = await downloadFile(metarUrl);
+
+    const parser = new xml2js.Parser();
+
+    const parsed = (await parser.parseStringPromise(metarXML)).response;
+
+    const rawData = parsed.data[0];
+    const resultCount = parseInt(rawData.$.num_results);
+
+    if (resultCount === 0) {
+      return res.json({
+        code: 1,
+        error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search nearest a bigger airport`,
+      });
+    }
+
+    const airportMetar = rawData.METAR[0];
+    const rawMetar = get(airportMetar.raw_text);
+    const wind_direction = parseFloat(get(airportMetar.wind_dir_degrees));
+    const wind_speed = parseFloat(get(airportMetar.wind_speed_kt));
+    const time = get(airportMetar.observation_time);
 
     res.json({
       name: airportData.name,
@@ -103,6 +114,7 @@ const runwayAPI = async (req, res) => {
       wind_direction,
       wind_speed,
       icao: icao.toUpperCase(),
+      station,
       time,
     });
   } catch (err) {
