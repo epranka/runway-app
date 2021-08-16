@@ -15,6 +15,7 @@ export default function AirportRunways(props) {
         ident: runway.le_ident,
         invertIdent: runway.he_ident,
         active: activeRunwaysData[runway.le_ident],
+        ils: runway.le_ils,
       });
 
       runways.push({
@@ -24,6 +25,7 @@ export default function AirportRunways(props) {
         ident: runway.he_ident,
         invertIdent: runway.le_ident,
         active: activeRunwaysData[runway.he_ident],
+        ils: runway.he_ils,
       });
     }
 
@@ -36,6 +38,7 @@ export default function AirportRunways(props) {
     const sortedRunways = runways.sort((a, b) => {
       return (
         sortIndexes[b.active?.status] - sortIndexes[a.active?.status] ||
+        (!!b.ils ? 1 : 0) - (!!a.ils ? 1 : 0) ||
         a.active?.crosswind - b.active?.crosswind
       );
     });
@@ -70,7 +73,7 @@ export default function AirportRunways(props) {
       ) : null}
       <div></div>
       <div className="flex flex-wrap justify-center max-w-7xl mx-auto">
-        {sortedRunways.map((runway, key) => {
+        {sortedRunways.map((runway) => {
           return (
             <AirportRunwayCard
               key={runway.ident}
@@ -80,6 +83,7 @@ export default function AirportRunways(props) {
               heading={runway.heading}
               length={runway.length}
               width={runway.width}
+              ils={runway.ils}
             />
           );
         })}

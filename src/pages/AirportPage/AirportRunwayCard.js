@@ -94,12 +94,24 @@ const AirportRunwayCard = (props) => {
               <span className="text-sm">ft</span>
             </span>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <span className="block">Inverted mark:</span>{" "}
             <span className="ml-5">
               <span className="block font-mono text-sm border border-gray-500 rounded-md px-2">
                 {props.invertMark}
               </span>{" "}
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span className="">ILS:</span>{" "}
+            <span>
+              <span className="font-mono font-semibold">
+                {props.ils ? (
+                  <span>{props.ils.freq + "/" + props.ils.course}&deg;</span>
+                ) : (
+                  "No"
+                )}
+              </span>
             </span>
           </div>
         </div>

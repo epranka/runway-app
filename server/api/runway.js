@@ -59,6 +59,8 @@ const runwayAPI = async (req, res) => {
         he_latitude_deg: parseFloat(runway.he_latitude_deg),
         he_longitude_deg: parseFloat(runway.he_longitude_deg),
         he_heading_degT: parseFloat(runway.he_heading_degT),
+        le_ils: runway.le_ils,
+        he_ils: runway.he_ils,
       };
     });
 
