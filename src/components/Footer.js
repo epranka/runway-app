@@ -10,7 +10,7 @@ export default function Footer() {
           target="_blank"
           title="Edvinas Pranka | Senior Developer"
           rel="noreferrer"
-          className="block mb-3 sm:mb-0 sm:mr-5 font-bold"
+          className="block mb-3 md:mb-0 md:mr-5 font-bold"
         >
           Epranka.com
         </a>
@@ -18,20 +18,20 @@ export default function Footer() {
           href="https://github.com/epranka/runway-app"
           target="_blank"
           rel="noreferrer"
-          className="block mb-3 sm:mb-0 sm:mr-5"
+          className="block mb-3 md:mb-0 md:mr-5"
         >
           GitHub
         </a>
         <Link
           to="/policy/terms-of-usage"
-          className="block mb-3 sm:mb-0 sm:mr-5"
+          className="block mb-3 md:mb-0 md:mr-5"
         >
           Terms of usage
         </Link>
-        <Link to="/policy/cookies" className="block mb-3 sm:mb-0 sm:mr-5">
+        <Link to="/policy/cookies" className="block mb-3 md:mb-0 md:mr-5">
           Cookies
         </Link>
-        <Link to="/contacts" className="block sm:mr-5">
+        <Link to="/contacts" className="block md:mr-5">
           Contacts
         </Link>
       </div>
