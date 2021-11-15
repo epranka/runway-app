@@ -33,6 +33,18 @@ const ContactsPage = () => {
           </section>
 
           <section className="text-center mb-5 lg:mr-6">
+            <h2 className="font-semibold mb-1">Website</h2>
+            <a
+              href="https://epranka.com"
+              title="Edvinas Pranka | Senior Developer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              epranka.com
+            </a>
+          </section>
+
+          <section className="text-center mb-5 lg:mr-6">
             <h2 className="font-semibold mb-1">Linkedin</h2>
             <a
               href="https://www.linkedin.com/in/epranka/"

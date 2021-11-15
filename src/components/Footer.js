@@ -6,12 +6,13 @@ export default function Footer() {
     <div className="mb-5 px-5 md:px-10 lg:px-20 relative z-10 flex items-end justify-between md:items-center mx-auto max-w-sreen-lg xl:max-w-screen-xl">
       <div className="flex flex-col md:flex-row justify-end items-end text-xs text-gray-500 font-medium tracking-wider">
         <a
-          href="https://descent.now.sh"
+          href="https://epranka.com"
           target="_blank"
+          title="Edvinas Pranka | Senior Developer"
           rel="noreferrer"
-          className="block mb-3 sm:mb-0 sm:mr-5"
+          className="block mb-3 sm:mb-0 sm:mr-5 font-bold"
         >
-          Descent.now.sh
+          Epranka.com
         </a>
         <a
           href="https://github.com/epranka/runway-app"
