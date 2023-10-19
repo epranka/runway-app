@@ -1,14 +1,10 @@
 const downloadFile = require("../helpers/downloadData");
-const xml2js = require("xml2js");
+const metarParser = require('aewx-metar-parser');
 
-const createMetarUrl = (icao) =>
-  `https://aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&stationString=${icao}&mostRecent=true&hoursBeforeNow=72`;
+const createMetarUrl = (icao) => `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;
+
 const createAirportUrl = (icao) =>
   `https://airportdb.io/api/v1/airport/${icao}?apiToken=${process.env.AIRPORTDB_API_TOKEN}`;
-
-const get = (value, fallback = null) => {
-  return Array.isArray(value) && value[0] ? value[0] : fallback;
-};
 
 const isNumber = (value) => {
   return typeof value === "number" && !isNaN(value);
@@ -87,27 +83,21 @@ const runwayAPI = async (req, res) => {
 
     const metarUrl = createMetarUrl(station.icao_code);
 
-    const metarXML = await downloadFile(metarUrl);
+    const metar = await downloadFile(metarUrl);
 
-    const parser = new xml2js.Parser();
-
-    const parsed = (await parser.parseStringPromise(metarXML)).response;
-
-    const rawData = parsed.data[0];
-    const resultCount = parseInt(rawData.$.num_results);
-
-    if (resultCount === 0) {
+    if (!metar.trim()) {
       return res.json({
         code: 1,
         error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search nearest a bigger airport`,
       });
     }
 
-    const airportMetar = rawData.METAR[0];
-    const rawMetar = get(airportMetar.raw_text);
-    const wind_direction = parseFloat(get(airportMetar.wind_dir_degrees));
-    const wind_speed = parseFloat(get(airportMetar.wind_speed_kt));
-    const time = get(airportMetar.observation_time);
+    const metarData = metarParser(metar.trim());
+
+    const rawMetar = metar;
+    const wind_direction = metarData.wind.degrees_from === 0 && metarData.wind.degrees_to === 359 ? 'VRB' : metarData.wind.degrees;
+    const wind_speed = metarData.wind.speed_kts;
+    const time = metarData.observed;
 
     res.json({
       name: airportData.name,

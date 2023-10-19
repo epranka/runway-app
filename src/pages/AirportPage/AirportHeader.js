@@ -31,7 +31,7 @@ export default function AirportHeader(props) {
         </h2>
         <div className="text-center text-3xl">
           <span>
-            {airport.wind_direction === 0 ? (
+            {airport.wind_direction === 'VRB' ? (
               "Variable"
             ) : (
               <span>{airport.wind_direction}&deg;</span>

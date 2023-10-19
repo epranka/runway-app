@@ -12,7 +12,7 @@ const useCalculateActiveRunways = (airport, airportIsValid) => {
     const windDirection = airport.wind_direction;
     const windSpeed = airport.wind_speed;
     // variable wind
-    if (windDirection === 0) return {};
+    if (windDirection === 'VRB') return {};
     const result = {};
     for (const runway of airport.runways) {
       // Runways heading inverted
