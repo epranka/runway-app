@@ -1,7 +1,15 @@
 const downloadFile = require("../helpers/downloadData");
 const metarParser = require('aewx-metar-parser');
 
-const createMetarUrl = (icao) => `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;
+const createMetarUrl = (provider, icao) => {
+  switch (provider.toLowerCase()) {
+    case 'vatsim':
+        return `https://metar.vatsim.net/${icao}`;
+    case 'aviationweather':
+    default:
+      return `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;
+  }
+};
 
 const createAirportUrl = (icao) =>
   `https://airportdb.io/api/v1/airport/${icao}?apiToken=${process.env.AIRPORTDB_API_TOKEN}`;
@@ -17,6 +25,7 @@ const isString = (value) => {
 const runwayAPI = async (req, res) => {
   try {
     const { icao } = req.params;
+    const metarProvider = req.query.metarProvider || 'aviationweather';
 
     const airportUrl = createAirportUrl(icao);
     const airportDataRaw = await downloadFile(airportUrl);
@@ -81,7 +90,7 @@ const runwayAPI = async (req, res) => {
       });
     }
 
-    const metarUrl = createMetarUrl(station.icao_code);
+    const metarUrl = createMetarUrl(metarProvider, station.icao_code);
 
     const metar = await downloadFile(metarUrl);
 
