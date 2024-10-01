@@ -42,15 +42,16 @@ export default function AirportSelectInput(props) {
   return (
     <div className="text-center relative">
       <div className="max-w-xs mx-auto relative">
-        <p className="text-sm mb-2">METAR provider</p>
-        <select value={metarProviderValue} onChange={handleMetarProviderValueChange} className={`block mb-5 bg-white w-full mx-auto uppercase border-2 border-black rounded-md h-14 text-2xl font-semibold text-center
+        <label for="metar-provider" className="block text-sm mb-2">METAR provider</label>
+        <select id="metar-provider" value={metarProviderValue} onChange={handleMetarProviderValueChange} className={`block mb-5 bg-white w-full mx-auto uppercase border-2 border-black rounded-md h-14 text-2xl font-semibold text-center
          outline-none placeholder-opacity-0`}>
           <option value="aviationweather">Aviation Weather</option>
           <option value="vatsim">VATSIM</option>
         </select>
-        <p className="text-sm mb-2">Enter ICAO</p>
+        <label for="icao" className="block text-sm mb-2">Enter ICAO</label>
         <div className="relative">
           <input
+              id="icao"
               value={icaoValue}
               onChange={handleIcaoValueChange}
               type="text"
