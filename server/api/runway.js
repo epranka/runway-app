@@ -40,7 +40,7 @@ const runwayAPI = async (req, res) => {
     if (!airportData.runways || !airportData.runways.length) {
       return res.json({
         code: 3,
-        error: `We have an invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
+        error: `Sorry. The requested airport has invalid runway data, so it can't be displayed. Try other nearest airport`,
       });
     }
 
@@ -86,7 +86,7 @@ const runwayAPI = async (req, res) => {
     if (!validRunways.length) {
       return res.json({
         code: 4,
-        error: `We have an invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
+        error: `Sorry. The requested airport has invalid runway data, so it can't be displayed. Try other nearest airport`,
       });
     }
 
@@ -97,7 +97,7 @@ const runwayAPI = async (req, res) => {
     if (!metar.trim()) {
       return res.json({
         code: 1,
-        error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search nearest a bigger airport`,
+        error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search a nearby international airport`,
       });
     }
 
