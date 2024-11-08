@@ -1,14 +1,17 @@
-# Prepare node
-
-FROM node:lts as node
+FROM node:20.13.1-alpine AS node
 
 WORKDIR /app
 
 COPY package.json /app
-COPY yarn.lock /app
-RUN yarn install
-COPY . /app
+COPY package-lock.json /app
+COPY .npmrc /app
+RUN npm ci
 
-CMD ./node_modules/pm2/bin/pm2-runtime ./main.js
+COPY server /app/server
+
+ENV SERVER_PORT=80
+ENV NODE_ENV=production
 
 EXPOSE 80
+
+CMD ["node", "server/main.cjs"]
