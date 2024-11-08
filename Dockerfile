@@ -11,6 +11,9 @@ RUN npm ci
 
 COPY . /app
 
+ARG VITE_APP_API_HOST
+ENV VITE_APP_API_HOST=$VITE_APP_API_HOST
+
 RUN npm run build
 
 FROM nginx:alpine
