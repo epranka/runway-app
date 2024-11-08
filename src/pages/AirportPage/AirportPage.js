@@ -11,8 +11,11 @@ import AirportRunways from "./AirportRunways";
 import AirportRunwaysMap from "./AirportRunwaysMap";
 import Compass from "./Compass";
 import WindDirectionBackground from "./WindDirectionBackground";
+import useStickyState from "../../hooks/useStickyState";
+import {DEFAULT_METAR_PROVIDER, METAR_PROVIDER_STORAGE_KEY} from "../../consts";
 
-export default function AirportPage(props) {
+export default function AirportPage() {
+  const [metarProvider] = useStickyState(DEFAULT_METAR_PROVIDER, METAR_PROVIDER_STORAGE_KEY);
   const [airport, setAirport] = useAirport();
   const { params } = useRouteMatch();
   const history = useHistory();
@@ -36,10 +39,10 @@ export default function AirportPage(props) {
 
   useEffect(() => {
     if (!airportIsValid) {
-      fetchAirport(params?.icao);
+      fetchAirport(metarProvider, params?.icao);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [metarProvider]);
 
   const activeRunwaysData = useCalculateActiveRunways(airport, airportIsValid);
 

@@ -1,17 +1,16 @@
 import axios from "axios";
 import { useCallback } from "react";
 
-const MAIN_HUMAN_ERROR_MESSAGE =
-  "Sorry, something went wrong. Try again later or contact administrators";
+const MAIN_HUMAN_ERROR_MESSAGE = "Sorry, something went wrong. Try again later or contact administrators";
 
 const useAirportFetch = ({ onLoading, onError, onLoaded }) => {
-  const fetch = useCallback(
-    async (icaoValue) => {
+  return useCallback(
+    async (metarProviderValue, icaoValue) => {
       onLoading && onLoading(true);
       onError(null);
       try {
         const response = await axios.get(
-          import.meta.env.VITE_APP_API_HOST + "/api/v1/runway/" + icaoValue
+          process.env.VITE_APP_API_HOST + "/api/v1/runway/" + icaoValue + "?metarProvider=" + metarProviderValue,
         );
         const data = response.data;
         if (!data) {
@@ -32,8 +31,6 @@ const useAirportFetch = ({ onLoading, onError, onLoaded }) => {
     },
     [onLoading, onError, onLoaded]
   );
-
-  return fetch;
 };
 
 export default useAirportFetch;

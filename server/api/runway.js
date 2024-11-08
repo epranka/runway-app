@@ -1,7 +1,15 @@
 const downloadFile = require("../helpers/downloadData.js");
 const metarParser = require('aewx-metar-parser');
 
-const createMetarUrl = (icao) => `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;
+const createMetarUrl = (provider, icao) => {
+  switch (provider.toLowerCase()) {
+    case 'vatsim':
+        return `https://metar.vatsim.net/${icao}`;
+    case 'aviationweather':
+    default:
+      return `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;
+  }
+};
 
 const createAirportUrl = (icao) =>
   `https://airportdb.io/api/v1/airport/${icao}?apiToken=${process.env.AIRPORTDB_API_TOKEN}`;
@@ -17,6 +25,7 @@ const isString = (value) => {
 const runwayAPI = async (req, res) => {
   try {
     const { icao } = req.params;
+    const metarProvider = req.query.metarProvider || 'aviationweather';
 
     const airportUrl = createAirportUrl(icao);
     const airportDataRaw = await downloadFile(airportUrl);
@@ -31,7 +40,7 @@ const runwayAPI = async (req, res) => {
     if (!airportData.runways || !airportData.runways.length) {
       return res.json({
         code: 3,
-        error: `We have an invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
+        error: `Sorry. The requested airport has invalid runway data, so it can't be displayed. Try other nearest airport`,
       });
     }
 
@@ -77,18 +86,18 @@ const runwayAPI = async (req, res) => {
     if (!validRunways.length) {
       return res.json({
         code: 4,
-        error: `We have an invalid airport runways data, so can't display it. Sorry. Try other nearest airport`,
+        error: `Sorry. The requested airport has invalid runway data, so it can't be displayed. Try other nearest airport`,
       });
     }
 
-    const metarUrl = createMetarUrl(station.icao_code);
+    const metarUrl = createMetarUrl(metarProvider, station.icao_code);
 
     const metar = await downloadFile(metarUrl);
 
     if (!metar.trim()) {
       return res.json({
         code: 1,
-        error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search nearest a bigger airport`,
+        error: `Can't find airport ${icao.toUpperCase()} metar data. Try to search a nearby international airport`,
       });
     }
 
