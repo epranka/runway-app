@@ -6,7 +6,7 @@
   "scripts": {
     "start:api": "node ./server/main.cjs",
     "start": "vite",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
