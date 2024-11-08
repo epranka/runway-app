@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useCookiesConsent from "./useCookiesConsent";
 

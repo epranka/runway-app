@@ -15,7 +15,9 @@ const rollupPlugin = (matchers) => ({
 });
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react({
+    jsxRuntime: "automatic",
+  })],
   build: {
     rollupOptions: {
       plugins: [
