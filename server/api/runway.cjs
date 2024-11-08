@@ -1,4 +1,4 @@
-const downloadFile = require("../helpers/downloadData.js");
+const downloadFile = require("../helpers/downloadData.cjs");
 const metarParser = require('aewx-metar-parser');
 
 const createMetarUrl = (provider, icao) => {

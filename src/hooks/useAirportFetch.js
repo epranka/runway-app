@@ -10,7 +10,7 @@ const useAirportFetch = ({ onLoading, onError, onLoaded }) => {
       onError(null);
       try {
         const response = await axios.get(
-          process.env.VITE_APP_API_HOST + "/api/v1/runway/" + icaoValue + "?metarProvider=" + metarProviderValue,
+          import.meta.env.VITE_APP_API_HOST + "/api/v1/runway/" + icaoValue + "?metarProvider=" + metarProviderValue,
         );
         const data = response.data;
         if (!data) {
