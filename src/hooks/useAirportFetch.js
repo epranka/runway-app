@@ -11,7 +11,7 @@ const useAirportFetch = ({ onLoading, onError, onLoaded }) => {
       onError(null);
       try {
         const response = await axios.get(
-          process.env.REACT_APP_API_HOST + "/api/v1/runway/" + icaoValue
+          import.meta.env.VITE_APP_API_HOST + "/api/v1/runway/" + icaoValue
         );
         const data = response.data;
         if (!data) {

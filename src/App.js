@@ -15,7 +15,7 @@ function App() {
       <Helmet>
         <script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.REACT_APP_GA_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.REACT_APP_GA_ID}`}
         ></script>
       </Helmet>
       <ScrollManagement>

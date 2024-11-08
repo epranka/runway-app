@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const runwayAPI = require("./api/runway");
+const runwayAPI = require("./api/runway.js");
 
 const app = express();
 const port = process.env.SERVER_PORT;

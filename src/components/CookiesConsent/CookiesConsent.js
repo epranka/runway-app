@@ -10,14 +10,14 @@ const CookiesConsent = () => {
   }, [setCookiesConsent]);
 
   useEffect(() => {
-    if (cookiesConsent && process.env.NODE_ENV === "production") {
+    if (cookiesConsent && import.meta.env.NODE_ENV === "production") {
       // Start using Google Analytics
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         window.dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", process.env.REACT_APP_GA_ID);
+      gtag("config", import.meta.env.REACT_APP_GA_ID);
     }
   }, [cookiesConsent]);
 

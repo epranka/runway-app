@@ -1,4 +1,4 @@
-const downloadFile = require("../helpers/downloadData");
+const downloadFile = require("../helpers/downloadData.js");
 const metarParser = require('aewx-metar-parser');
 
 const createMetarUrl = (icao) => `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;

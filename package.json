@@ -2,6 +2,13 @@
   "name": "runway-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "scripts": {
+    "start:api": "node ./server/main.cjs",
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
     "@craco/craco": "6.1.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
@@ -13,6 +20,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@vitejs/plugin-react": "^4.3.3",
     "aewx-metar-parser": "^1.0.0",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
@@ -25,17 +33,10 @@
     "react-helmet": "^6.1.0",
     "react-hotjar": "^5.0.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3",
     "request": "^2.88.2",
     "spacetime": "^6.16.2",
+    "vite": "^5.4.10",
     "xml2js": "^0.4.23"
-  },
-  "scripts": {
-    "start:api": "node ./server/main.js",
-    "start": "craco start",
-    "build": "GENERATE_SOURCEMAP=false craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
