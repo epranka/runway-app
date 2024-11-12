@@ -17,8 +17,6 @@ function App() {
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_APP_GA_ID}`}
         ></script>
-        <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.VITE_APP_ADSENSE_CLIENT}`}
-          crossorigin="anonymous"></script>
       </Helmet>
       <ScrollManagement>
         <Router>
