@@ -10,7 +10,7 @@ const CookiesConsent = () => {
   }, [setCookiesConsent]);
 
   useEffect(() => {
-    if (cookiesConsent && import.meta.env.NODE_ENV === "production") {
+    if (cookiesConsent && import.meta.env.PROD) {
       // Start using Google Analytics
       window.dataLayer = window.dataLayer || [];
       function gtag() {
