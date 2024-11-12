@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import PageLayout from "../components/PageLayout";
+import React from 'react';
 
 const CookiesPolicyPage = () => {
   return (

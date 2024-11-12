@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import { default as React, useCallback } from "react";
 import { Helmet } from "react-helmet";
 import { useHistory, useLocation } from "react-router-dom";
 import { useAirport } from "../../AirportContext";

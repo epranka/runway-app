@@ -15,9 +15,7 @@ const rollupPlugin = (matchers) => ({
 });
 
 export default defineConfig({
-  plugins: [react({
-    jsxRuntime: "automatic",
-  })],
+  plugins: [react()],
   build: {
     rollupOptions: {
       plugins: [
@@ -36,6 +34,7 @@ export default defineConfig({
     },
   },
   esbuild: {
+    jsx: 'automatic',
     loader: "jsx",
     include: /\/src\/.*\.js$/,
     exclude: [],
