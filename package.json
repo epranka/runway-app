@@ -10,11 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-brands-svg-icons": "^5.15.3",
-    "@fortawesome/free-regular-svg-icons": "^5.15.3",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "@fortawesome/react-fontawesome": "^0.1.14",
     "@octokit/rest": "^17.3.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -26,6 +21,7 @@
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "lucide-react": "^0.456.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
@@ -35,9 +31,6 @@
     "spacetime": "^6.16.2",
     "vite": "^5.4.10",
     "xml2js": "^0.4.23"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [

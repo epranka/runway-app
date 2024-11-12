@@ -1,9 +1,9 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clsx from "clsx";
+import { Loader2, TriangleAlert } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
+import { DEFAULT_METAR_PROVIDER, METAR_PROVIDER_STORAGE_KEY } from "../consts";
 import useAirportFetch from "../hooks/useAirportFetch";
 import useStickyState from "../hooks/useStickyState";
-import {DEFAULT_METAR_PROVIDER, METAR_PROVIDER_STORAGE_KEY} from "../consts";
 
 export default function AirportSelectInput(props) {
   const [metarProviderValue, setMetarProviderValue] = useStickyState(DEFAULT_METAR_PROVIDER, METAR_PROVIDER_STORAGE_KEY);
@@ -51,37 +51,27 @@ export default function AirportSelectInput(props) {
         <label for="icao" className="block text-sm mb-2">Enter ICAO</label>
         <div className="relative">
           <input
-              id="icao"
-              value={icaoValue}
-              onChange={handleIcaoValueChange}
-              type="text"
-              className={`block bg-white w-full mx-auto uppercase border-2 border-black rounded-md h-14 text-2xl font-semibold text-center
+            id="icao"
+            value={icaoValue}
+            onChange={handleIcaoValueChange}
+            type="text"
+            className={`block bg-white w-full mx-auto uppercase border-2 border-black rounded-md h-14 text-2xl font-semibold text-center
          outline-none placeholder-opacity-0`}
-              placeholder="EGLL"
+            placeholder="EGLL"
           />
           {isLoading || error ? (
-              <div
-                  className={clsx("absolute right-4 top-4 text-gray-300", {
-                    "text-red-500": error,
-                  })}
-              >
-                <FontAwesomeIcon
-                    icon={[
-                      "fas",
-                      isLoading
-                          ? "circle-notch"
-                          : error
-                              ? "exclamation-triangle"
-                              : null,
-                    ]}
-                    spin={isLoading}
-                />
-              </div>
+            <div
+              className={clsx("absolute right-4 top-4 text-gray-300", {
+                "text-red-500": error,
+              })}
+            >
+              {isLoading ? <Loader2 className="animate-spin" /> : error ? <TriangleAlert className="text-red-500" /> : null}
+            </div>
           ) : null}
           {error ? (
-              <div className="mt-3 font-semibold text-sm text-red-600 max-w-xs mx-auto">
-                {error}
-              </div>
+            <div className="mt-3 font-semibold text-sm text-red-600 max-w-xs mx-auto">
+              {error}
+            </div>
           ) : null}
         </div>
       </div>
