@@ -4,11 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  @variants responsive {
-    .c-min-h-screen {
-      min-height: calc(100vh - 40px);
-    }
+@layer base {
+  .c-min-h-screen {
+    min-height: calc(100vh - 40px);
   }
 }
 
