@@ -17,7 +17,7 @@ const CookiesConsent = () => {
         window.dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", import.meta.env.REACT_APP_GA_ID);
+      gtag("config", import.meta.env.VITE_APP_GA_ID);
     }
   }, [cookiesConsent]);
 

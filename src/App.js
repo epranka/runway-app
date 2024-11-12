@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, BrowserRouter as Router } from "react-router-dom";
 import AirportContextProvider from "./AirportContext";
 import ScrollManagement from "./components/ScrollManagement";
 import AirportPage from "./pages/AirportPage/AirportPage";
@@ -15,8 +15,10 @@ function App() {
       <Helmet>
         <script
           async
-          src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.REACT_APP_GA_ID}`}
+          src={`https://www.googletagmanager.com/gtag/js?id=${import.meta.env.VITE_APP_GA_ID}`}
         ></script>
+        <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${import.meta.env.VITE_APP_ADSENSE_CLIENT}`}
+          crossorigin="anonymous"></script>
       </Helmet>
       <ScrollManagement>
         <Router>
