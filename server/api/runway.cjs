@@ -7,7 +7,7 @@ const createMetarUrl = (provider, icao) => {
         return `https://metar.vatsim.net/${icao}`;
     case 'aviationweather':
     default:
-      return `https://aviationweather.gov/cgi-bin/data/metar.php?ids=${icao}`;
+      return `https://aviationweather.gov/api/data/metar?ids=${icao}`;
   }
 };
 
